@@ -1,10 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:shopping_list/widgets/new_item_screen.dart';
 import 'package:shopping_list/data/dummy_items.dart';
 
-class GroceryList extends StatelessWidget {
+class GroceryList extends StatefulWidget {
   const GroceryList({super.key});
+
+  @override
+  State<GroceryList> createState() => _GroceryListState();
+}
+
+class _GroceryListState extends State<GroceryList> {
+  void _addItem() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (ctx) => const NewItemScreen()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +30,12 @@ class GroceryList extends StatelessWidget {
                   height: 24,
                   color: groceryItems[index].category.color,
                 ),
-            trailing: Text(groceryItems[index].quantity.toString()),
+                trailing: Text(groceryItems[index].quantity.toString()),
               )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _addItem,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
